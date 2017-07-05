@@ -21,6 +21,14 @@
 # include <stdint.h>
 # include <wchar.h>
 
+typedef struct	s_for
+{
+	char opt;
+	int min;
+	int pre;
+	char len;
+}		t_for;
+
 typedef struct	s_var
 {
 	union		u_val
@@ -34,8 +42,10 @@ typedef struct	s_var
 		wchar_t		*wc;
 		void		*p;
 	}			t_val;
-	int	type;
-}				t_var;
+	t_for		*f;
+	int		type;
+}		t_var;
+
 
 enum
 {
