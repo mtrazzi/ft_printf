@@ -19,9 +19,19 @@ int	ft_printf(const char * restrict format, ...)
 		else if (*format == '%')
 		{
 			x = ft_parse(format, x);
-			x = ft_insert(x, va_arg(ap, x->type)); //problem because x->type can have any type
-			ft_putstr(ft_convert(x));
+			ft_putstr(x->f->opt);
+			ft_putchar('\n');
+			ft_putnbr(x->f->min);
+			ft_putchar('\n');
+			ft_putnbr(x->f->pre);
+			ft_putchar('\n');
+			ft_putchar(x->f->len);
+			ft_putchar('\n');
+			ft_putchar(x->f->type);
+			format = ft_strchr(format, ft_next_conversion(format));
 		}
+		else
+			ft_putchar(*format);
 		format++;	
 	}
 	va_end(ap);

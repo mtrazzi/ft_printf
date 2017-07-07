@@ -10,7 +10,7 @@ int		ft_is_conversion(char c)
 		return (c == 'x' || c == 'X' || c == 'c' || c == 'C');
 }
 
-char	ft_next_conversion(char *str)
+char	ft_next_conversion(const char *str)
 {
 	int i;
 

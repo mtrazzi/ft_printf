@@ -4,23 +4,10 @@
 #include <limits.h>
 #include <wchar.h>
 
-void	var_print(t_var *variable)
-{
-	switch(variable->type)
-	{
-		case TYPE_STR:
-		printf("%s\n", variable->t_val.s);
-		break;
-		default:
-		printf("Unknown type\n");
-		break;
-	}
-}
-
 int main(int ac, char **av)
 {
-	if (ac < 2)
-		return (0);
-	ft_printf(">>>%s<<<", av[1]);
+	(void)ac;
+	
+	ft_printf("%#04llo");
 	return (0);
 }
