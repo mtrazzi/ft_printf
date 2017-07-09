@@ -1,14 +1,19 @@
 #include "ft_printf.h"
 
+void ft_printf_aux(t_var *x)
+{
+	if (x->f->type == 'd')
+		ft_putnbr(x->u->d);
+	if (x->f->type == 's')
+		ft_putstr(x->u->s);
+}
+
 int	ft_printf(const char * restrict format, ...)
 {
 	va_list ap;
 	t_var	*x;
-	int ret;
 
-	x = (t_var *)malloc(sizeof(t_var));
 	va_start(ap, format);
-	ret = 0;
 	while (*format != '\0')
 	{
 		if (!ft_strncmp("%%", format, 2))
@@ -18,16 +23,9 @@ int	ft_printf(const char * restrict format, ...)
 		}
 		else if (*format == '%')
 		{
-			x = ft_parse(format, x);
-			ft_putstr(x->f->opt);
-			ft_putchar('\n');
-			ft_putnbr(x->f->min);
-			ft_putchar('\n');
-			ft_putnbr(x->f->pre);
-			ft_putchar('\n');
-			ft_putchar(x->f->len);
-			ft_putchar('\n');
-			ft_putchar(x->f->type);
+			x = ft_init(format);
+			ft_assign(x, ap);
+			ft_printf_aux(x);
 			format = ft_strchr(format, ft_next_conversion(format));
 		}
 		else
