@@ -43,6 +43,8 @@ t_var	*ft_parse_opt(const char *s, t_var *x)
 	c = ft_next_conversion(s);
 	if (res[4] > '0' && c != 'x' && c != 'X' && c != 'o' && c != 'O')
 		exit(EXIT_FAILURE);
+	else if (res[4] > '0')
+		res[4] = c;
 	f->opt = res;
 	x->f = f;
 	return (x);

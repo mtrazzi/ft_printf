@@ -236,19 +236,6 @@ void	*ft_memset(void *str, int c, size_t n)
 	}
 	return (answer);
 }
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/27 12:45:51 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/05/27 13:37:18 by mtrazzi          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "libft.h"
 
 char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
@@ -265,5 +252,60 @@ char	*ft_strncpy(char *dest, const char *src, size_t n)
 		dest[i] = '\0';
 		i++;
 	}
+	return (dest);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/27 16:37:43 by mtrazzi           #+#    #+#             */
+/*   Updated: 2017/06/01 16:43:38 by mtrazzi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char *dst;
+
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	if ((dst = ft_strnew(ft_strlen(s1) + ft_strlen(s2))) == NULL)
+		return (NULL);
+	return (ft_strcat(ft_strcat(dst, s1), s2));
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/27 12:45:31 by mtrazzi           #+#    #+#             */
+/*   Updated: 2017/05/27 12:56:32 by mtrazzi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*ft_strcat(char *dest, const char *src)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (dest[i])
+		i++;
+	while (src[j])
+	{
+		dest[i + j] = src[j];
+		j++;
+	}
+	dest[i + j] = '\0';
 	return (dest);
 }

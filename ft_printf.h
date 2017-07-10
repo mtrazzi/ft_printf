@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:10:13 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/09 19:20:36 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/10 17:35:33 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ typedef struct	s_var
 {
 	t_val		*u;
 	t_for		*f;
+	char		*pre; //le prefixe simple du type +, -, O, oX, OX
+	char		*mid; //le remplissage de 0 ou ' '
+	char		*str; //le nb essentiellement
+	char		*suf; //ce qui vient apres notre str dans le cas du -
 }		t_var;
 
 t_var	*ft_parse_opt(const char *s, t_var *x);
@@ -69,5 +73,7 @@ void var_print(t_var *variable);
 int	is_opt(char c);
 t_var *ft_init(const char *format);
 t_var *ft_assign(t_var *, va_list ap);
+t_var *ft_insert_pre(t_var *x);
+t_var *ft_insert_str(t_var *x);
 
 #endif

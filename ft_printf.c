@@ -2,10 +2,8 @@
 
 void ft_printf_aux(t_var *x)
 {
-	if (x->f->type == 'd')
-		ft_putnbr(x->u->d);
-	if (x->f->type == 's')
-		ft_putstr(x->u->s);
+	ft_putstr(x->pre);
+	ft_putstr(x->str);
 }
 
 int	ft_printf(const char * restrict format, ...)
@@ -24,7 +22,9 @@ int	ft_printf(const char * restrict format, ...)
 		else if (*format == '%')
 		{
 			x = ft_init(format);
-			ft_assign(x, ap);
+			x = ft_assign(x, ap);
+			x = ft_insert_pre(x);
+			x = ft_insert_str(x);
 			ft_printf_aux(x);
 			format = ft_strchr(format, ft_next_conversion(format));
 		}

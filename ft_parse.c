@@ -1,6 +1,5 @@
 #include "ft_printf.h"
 
-//pour le parsing on considère qu'on a une chaîne de la forme "%-12.4hd". Certaines specifications dans le format peuvent ne pas etre presentes mais un type de conversion est obligatoire. Je considere qu'on pourra toujours trouver un type de conversion et qu'apres ce type il y a un '\0'
 const char	*end_op(const char *s)
 {
 	int i;

@@ -9,5 +9,7 @@ t_var	*ft_init(const char *format)
 	x = ft_parse(format, x);
 	v = (t_val *)malloc(sizeof(t_val));
 	x->u = v;
+	x->pre = "";
+	x->str = "";
 	return (x);
 }

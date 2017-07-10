@@ -8,6 +8,8 @@
 int main(int ac, char **av)
 {
 	(void)ac;
+	(void)av;
 
-	ft_printf("coucou !\n%s\nJe suis a %d\n", "C'est bob", 23234325235);
+	printf("%-.5d\n", 42);
+	return (0);
 }
