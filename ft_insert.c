@@ -45,7 +45,7 @@ t_var	*ft_insert_start(t_var *x)
 	while (n + str_len + pre_len < x->f->pre)
 		n++;
 	x->mid = ft_memset(ft_strnew(n), '0', n);
-	while (m + n + str_len + ft_strlen(x->pre) < x->f->len)
+	while (m + n + str_len + ft_strlen(x->pre) < x->f->min)
 		m++;
 	x->suf = ft_memset(ft_strnew(n), ' ', m);
 	return (x);
@@ -63,10 +63,25 @@ t_var	*ft_insert_mid_suf(t_var *x)
 	if (x->f->opt[0] > '0')
 		return (ft_insert_start(x));
 	pre_len = ft_strlen(x->pre);
+	str_len = ft_strlen(x->str);
 	while (n + str_len < x->f->pre)
 		n++;
-	while (m + n + str_len + pre_len < x->f->len)
+	while (m + n + str_len + pre_len < x->f->min)
 		m++;
-	x->mid = ft_strjoin(ft_memset(ft_strnew(n), ' ', m), ft_memset(ft_strnew(n), '0', n));
+	//printf("\n>>>m : %zu", m);
+	//printf("\n>>>n : %zu", n);
+	//printf("\n>>>str_len : %zu", str_len);
+	//printf("\n>>>pre_len : %zu", pre_len);
+	//printf("\n>>>x->f->pre : %d", x->f->pre);
+	//printf("\n>>>x->f->min : %d", x->f->min);	
+	x->mid = ft_strjoin(ft_memset(ft_strnew(m), ' ', m), ft_memset(ft_strnew(n), '0', n));
+	return (x);
+}
+
+t_var *ft_insert(t_var *x)
+{
+	x = ft_insert_pre(x);
+	x = ft_insert_str(x);
+	x = ft_insert_mid_suf(x);
 	return (x);
 }
