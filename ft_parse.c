@@ -34,7 +34,7 @@ t_var		*ft_parse_pre(const char *s, t_var *x)
 
 t_var		*ft_parse_type(const char *s, t_var *x)
 {
-	x->f->type = ft_next_conversion(s);
+	x->f->type = ft_next_conversion(s + 1);
 	return (x);
 }
 

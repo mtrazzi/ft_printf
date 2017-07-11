@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:10:13 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/11 15:05:07 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/11 16:58:16 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 typedef struct	s_for //to free
 {
 	char *opt; //to free
-	int min;
+	size_t	min;
 	size_t	pre;
 	char len; //L pour ll et H pour hh
 	char type;

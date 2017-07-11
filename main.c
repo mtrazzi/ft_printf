@@ -10,7 +10,15 @@ int main(int ac, char **av)
 	(void)ac;
 	(void)av;
 
-	ft_printf("|%#8o|\n", 42);
-	printf("|%#8o|\n", 42);
+	long i = 0;
+	while (i++ < 4294967299)
+	{	
+		ft_printf(">>>|%lx|\n", 4294967296);
+		ft_putnbr(i);
+		//printf(">>>|%lx|\n", 4294967296);
+	}
+	//ft_printf("|%#8x|\n", 42);
+	//printf("|%#8x|\n", 42);
+	printf("%lld", (long long int)42);
 	return (0);
 }

@@ -17,15 +17,23 @@ t_var	*ft_insert_pre(t_var *x)
 	}
 	if (x->f->opt[1] > '0')
 		change_pre(x, "+");
-	if (x->f->opt[3] > '0')
+	if (x->f->opt[3] > '0' && !(x->f->type == '%'))
 		change_pre(x, " ");
 	return (x);
 }
 
 t_var	*ft_insert_str(t_var *x)
 {
-	if (x->f->type == 'd')
+	if (ft_strchr("di", x->f->type))
 		change_str(x, ft_itoa(x->u->d));
+	if (ft_strchr("u", x->f->type))
+		change_str(x, ft_itoa(x->u->u));
+	if (ft_strchr("oxX", x->f->type))
+		ft_conv_d(x);
+	if (x->f->type == 's')
+		change_str(x, x->u->s);
+	if (x->f->type == '%')
+		change_str(x, "%");
 	return (x);
 }
 

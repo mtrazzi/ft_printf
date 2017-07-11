@@ -7,7 +7,7 @@ int		ft_is_conversion(char c)
 	else if (c == 'i' || c == 'o' || c == 'O' || c == 'u' || c == 'U')
 		return (1);
 	else
-		return (c == 'x' || c == 'X' || c == 'c' || c == 'C');
+		return (c == 'x' || c == 'X' || c == 'c' || c == 'C' || c == '%');
 }
 
 char	ft_next_conversion(const char *str)

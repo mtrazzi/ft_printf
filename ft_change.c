@@ -31,12 +31,7 @@ void	change_suf(t_var *x, char *str)
 {
 	if (!str)
 		exit(EXIT_FAILURE);
-	ft_putstr("avant : ");
-	ft_putstr(x->suf);
 	free(x->suf);
 	if (!(x->suf = ft_strdup(str)))
 		exit(EXIT_FAILURE);
-	ft_putstr("\napres : ");
-	ft_putstr(x->suf);
-	ft_putstr("\n");
 }
