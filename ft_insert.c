@@ -60,14 +60,15 @@ t_var	*ft_insert_mid_suf(t_var *x)
 	m = 0;
 	if (x->f->opt[0] > '0')
 		return (ft_insert_start(x));
-	while (n + ft_strlen(x->str) < x->f->pre)
+	while (n + (x->f->type == 'o' ? ft_strlen(x->pre) : 0) + ft_strlen(x->str) < x->f->pre)
 		n++;
 	while (m + n + ft_strlen(x->str) + ft_strlen(x->pre) < x->f->min)
 		m++;
 	//printf("\n>>>m : %zu", m);
 	//printf("\n>>>n : %zu", n);
-	//printf("\n>>>str_len : %zu", str_len);
-	//printf("\n>>>pre_len : %zu", pre_len);
+	//printf("\n>>>str_len : %zu", ft_strlen(x->str));
+	//printf("\n>>>pre_len : %zu", ft_strlen(x->pre));
+	//printf(">>>%s<<<\n", x->pre);
 	//printf("\n>>>x->f->pre : %zu", x->f->pre);
 	//printf("\n>>>x->f->min : %d", x->f->min);	
 	
@@ -75,6 +76,7 @@ t_var	*ft_insert_mid_suf(t_var *x)
 		exit(EXIT_FAILURE);
 	if (!(str2 = ft_memset(ft_strnew(n), '0', n)))
 		exit(EXIT_FAILURE);
+	
 	change_mid(x, ft_strjoin(str1, str2));
 	free(str1);
 	free(str2);
