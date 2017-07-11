@@ -1,5 +1,6 @@
 #include "libft.h"
 
+
 size_t	ft_strlen(const char *s)
 {
 	size_t i;
@@ -165,7 +166,8 @@ int	ft_isdigit(int c)
 	return ('0' <= c && c <= '9');
 }
 
-static	size_t			num_dig(int n)
+
+static	size_t			num_dig(long long n)
 {
 	size_t m;
 
@@ -178,7 +180,7 @@ static	size_t			num_dig(int n)
 	return (m);
 }
 
-static char				*ft_itoa_aux(int n, char *s, int len, int i)
+static char				*ft_itoa_aux(long long n, char *s, int len, int i)
 {
 	while (--len >= 0)
 	{
@@ -188,16 +190,16 @@ static char				*ft_itoa_aux(int n, char *s, int len, int i)
 	return (s - i);
 }
 
-char					*ft_itoa(int n)
+char					*ft_itoa(long long n)
 {
 	char *tmp;
 
-	if (n == -2147483648)
-	{
-		if ((tmp = ft_strnew(sizeof(char) * 11)) == NULL)
-			return (NULL);
-		return (ft_strncpy(tmp, "-2147483648", 11));
-	}
+	//if (n == -9223372036854775808)
+	//{
+	//	if ((tmp = ft_strnew(sizeof(char) * 20)) == NULL)
+	//		return (NULL);
+	//	return (ft_strncpy(tmp, "-9223372036854775808", 20));
+	//}
 	if (n < 0)
 	{
 		if ((tmp = ft_strnew(num_dig(-n) + 1)) == NULL)
@@ -209,7 +211,6 @@ char					*ft_itoa(int n)
 		return (NULL);
 	return (ft_itoa_aux(n, tmp, num_dig(n), 0));
 }
-
 void	*ft_memalloc(size_t size)
 {
 	char	*ans;

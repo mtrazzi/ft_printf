@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:10:13 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/10 19:02:10 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/11 15:05:07 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include <wchar.h>
 # include <locale.h>
 
-typedef struct	s_for
+typedef struct	s_for //to free
 {
 	char *opt; //to free
 	int min;
-	int pre;
+	size_t	pre;
 	char len; //L pour ll et H pour hh
 	char type;
 }		t_for;
@@ -74,5 +74,12 @@ int	is_opt(char c);
 t_var *ft_init(const char *format);
 t_var *ft_assign(t_var *, va_list ap);
 t_var *ft_insert(t_var *x);
+char	*ft_itoa_base(unsigned long long n, char *base);
+t_var	*ft_conv_d(t_var *x);
+void	change_pre(t_var *x, char *str);
+void	change_str(t_var *x, char *str);
+void	change_mid(t_var *x, char *str);
+void	change_suf(t_var *x, char *str);
+void	ft_free_all(t_var *x);
 
 #endif

@@ -5,11 +5,15 @@ t_var	*ft_init(const char *format)
 	t_var *x;
 	t_val *v;
 
-	x = (t_var *)malloc(sizeof(t_var));
+	if (!(x = (t_var *)malloc(sizeof(t_var))))
+		exit(EXIT_FAILURE);
 	x = ft_parse(format, x);
-	v = (t_val *)malloc(sizeof(t_val));
+	if (!(v = (t_val *)malloc(sizeof(t_val))))
+		exit(EXIT_FAILURE);
 	x->u = v;
-	x->pre = "";
-	x->str = "";
+	x->mid = ft_strdup("");
+	x->pre = ft_strdup("");
+	x->str = ft_strdup("");
+	x->suf = ft_strdup("");
 	return (x);
 }

@@ -32,7 +32,7 @@ t_var	*ft_parse_opt(const char *s, t_var *x)
 	t_for *f;
 	char c;
 
-	f = (t_for *)malloc(sizeof(t_for));
+	f = (t_for *)malloc(sizeof(t_for)); //to free
 	res = ft_parse_opt_aux(s);
 	if (res[0] > '0' && res[2] > '0')
 		res[2] = '0';

@@ -8,26 +8,24 @@ t_var	*ft_insert_pre(t_var *x)
 	{
 		c = (x->f->opt)[4];
 		if (c == 'x')
-			x->pre = "0x";
+			change_pre(x,"0x");
 		else if (c == 'X')
-			x->pre = "0X";
+			change_pre(x, "0X");
 		else if (c == 'o')
-			x->pre = "0";
+			change_pre(x, "0");
 		return (x);
 	}
 	if (x->f->opt[1] > '0')
-		x->pre = "+";
+		change_pre(x, "+");
 	if (x->f->opt[3] > '0')
-		x->pre = " ";
-	else
-		x->pre = "";
+		change_pre(x, " ");
 	return (x);
 }
 
 t_var	*ft_insert_str(t_var *x)
 {
 	if (x->f->type == 'd')
-		x->str = ft_itoa(x->u->d);
+		change_str(x, ft_itoa(x->u->d));
 	return (x);
 }
 
@@ -44,37 +42,42 @@ t_var	*ft_insert_start(t_var *x)
 	str_len = ft_strlen(x->str);
 	while (n + str_len + pre_len < x->f->pre)
 		n++;
-	x->mid = ft_memset(ft_strnew(n), '0', n);
+	change_mid(x, ft_memset(ft_strnew(n), '0', n));
 	while (m + n + str_len + ft_strlen(x->pre) < x->f->min)
 		m++;
-	x->suf = ft_memset(ft_strnew(n), ' ', m);
+	change_suf(x, ft_memset(ft_strnew(n), ' ', m));
 	return (x);
 }
 
 t_var	*ft_insert_mid_suf(t_var *x)
 {
 	size_t n;
-	size_t pre_len;
-	size_t str_len;
 	size_t m;
+	char *str1;
+	char *str2;
 
 	n = 0;
 	m = 0;
 	if (x->f->opt[0] > '0')
 		return (ft_insert_start(x));
-	pre_len = ft_strlen(x->pre);
-	str_len = ft_strlen(x->str);
-	while (n + str_len < x->f->pre)
+	while (n + ft_strlen(x->str) < x->f->pre)
 		n++;
-	while (m + n + str_len + pre_len < x->f->min)
+	while (m + n + ft_strlen(x->str) + ft_strlen(x->pre) < x->f->min)
 		m++;
 	//printf("\n>>>m : %zu", m);
 	//printf("\n>>>n : %zu", n);
 	//printf("\n>>>str_len : %zu", str_len);
 	//printf("\n>>>pre_len : %zu", pre_len);
-	//printf("\n>>>x->f->pre : %d", x->f->pre);
+	//printf("\n>>>x->f->pre : %zu", x->f->pre);
 	//printf("\n>>>x->f->min : %d", x->f->min);	
-	x->mid = ft_strjoin(ft_memset(ft_strnew(m), ' ', m), ft_memset(ft_strnew(n), '0', n));
+	
+	if (!(str1 = ft_memset(ft_strnew(m), ' ', m)))
+		exit(EXIT_FAILURE);
+	if (!(str2 = ft_memset(ft_strnew(n), '0', n)))
+		exit(EXIT_FAILURE);
+	change_mid(x, ft_strjoin(str1, str2));
+	free(str1);
+	free(str2);
 	return (x);
 }
 

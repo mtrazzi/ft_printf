@@ -28,7 +28,7 @@ t_var		*ft_parse_pre(const char *s, t_var *x)
 	if (str[i] == '.')
 		x->f->pre = ft_atoi(str + i + 1);
 	else
-		x->f->pre = -1; //défault
+		x->f->pre = 0; //défault
 	return (x);
 }
 

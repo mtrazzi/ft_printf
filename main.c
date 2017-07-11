@@ -10,8 +10,7 @@ int main(int ac, char **av)
 	(void)ac;
 	(void)av;
 
-	ft_printf("%-3.5d\n", 42);
-	ft_printf("%-.5d\n", 42);
-	ft_printf("%12.5d\n", 42);
+	ft_printf("|%#8o|\n", 42);
+	printf("|%#8o|\n", 42);
 	return (0);
 }
