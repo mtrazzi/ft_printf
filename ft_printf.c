@@ -1,20 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/12 16:00:59 by mtrazzi           #+#    #+#             */
+/*   Updated: 2017/07/12 20:07:04 by mtrazzi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
+
+void ft_final_print(char *s1, char *s2, char *s3, char *s4)
+{
+	ft_putstr(s1);
+	ft_putstr(s2);
+	ft_putstr(s3);
+	ft_putstr(s4);
+}
+
 
 void ft_printf_aux(t_var *x)
 {
-	//ft_putstr("mid>>>");
-	//ft_putstr(x->mid);
-	//ft_putstr("<<<\npre>>>");
-	//ft_putstr(x->pre);
-	//ft_putstr("<<<\nstr>>>");
-	//ft_putstr(x->str);
-	//ft_putstr("<<<\nsuf>>>");
-	//ft_putstr(x->suf);
-	//ft_putstr("<<<\n|");
-	ft_putstr(x->mid);
-	ft_putstr(x->pre);
-	ft_putstr(x->str);
-	ft_putstr(x->suf);
+//	ft_putstr("mid>>>");
+//	ft_putstr(x->mid);
+//	ft_putstr("<<<\npre>>>");
+//	ft_putstr(x->pre);
+//	ft_putstr("<<<\nstr>>>");
+//	ft_putstr(x->str);
+//	ft_putstr("<<<\nsuf>>>");
+//	ft_putstr(x->suf);
+//	ft_putstr("<<<\n|");
+	if (x->f->opt[2] > '0')
+		ft_final_print(x->pre, x->mid, x->str, x->suf);
+	else
+		ft_final_print(x->mid, x->pre, x->str, x->suf);
 }
 
 int	ft_printf(const char * restrict format, ...)

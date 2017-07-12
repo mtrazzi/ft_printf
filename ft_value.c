@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_next_conversion.c                               :+:      :+:    :+:   */
+/*   ft_value.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/12 16:00:50 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/12 16:00:51 by mtrazzi          ###   ########.fr       */
+/*   Created: 2017/07/12 16:00:10 by mtrazzi           #+#    #+#             */
+/*   Updated: 2017/07/12 17:31:30 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_is_conversion(char c)
+int		ft_is_null_u(t_var *x)
 {
-	if (c == 's' || c == 'S' || c == 'p' || c == 'd' || c == 'D')
-		return (1);
-	else if (c == 'i' || c == 'o' || c == 'O' || c == 'u' || c == 'U')
-		return (1);
-	else
-		return (c == 'x' || c == 'X' || c == 'c' || c == 'C' || c == '%');
-}
+	t_val	*a;
+	char	c;
 
-char	ft_next_conversion(const char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] && !(ft_is_conversion(str[i])))
-		i++;
-	return (str[i]);
+	c = x->f->len;
+	a = x->u;
+	if (c == 0 && a->u == 0)
+		return (1);
+	if (c == 'l' && a->lu == 0)
+		return (1);
+	if (c == 'L' && a->llu == 0)
+		return (1);
+	if (c == 'h' && a->hu == 0)
+		return (1);
+	if (c == 'H' && a->hhu == 0)
+		return (1);
+	if (c == 'j' && a->ju == 0)
+		return (1);
+	if (c == 'z' && a->zu == 0)
+		return (1);
+	return (c == -1 && !(a->u || a->u || a->u || a->u || a->u || a->u || a->u | a->u));
 }

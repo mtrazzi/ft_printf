@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:10:13 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/11 16:58:16 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/12 18:59:37 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 typedef struct	s_for //to free
 {
-	char *opt; //to free
+	char *opt; //to free : ordre : -+0' '#
 	size_t	min;
 	size_t	pre;
 	char len; //L pour ll et H pour hh
@@ -76,10 +76,14 @@ t_var *ft_assign(t_var *, va_list ap);
 t_var *ft_insert(t_var *x);
 char	*ft_itoa_base(unsigned long long n, char *base);
 t_var	*ft_conv_d(t_var *x);
+t_var	*ft_conv_s(t_var *x);
+t_var	*ft_conv_c(t_var *x);
 void	change_pre(t_var *x, char *str);
 void	change_str(t_var *x, char *str);
 void	change_mid(t_var *x, char *str);
 void	change_suf(t_var *x, char *str);
 void	ft_free_all(t_var *x);
+int		ft_is_null_u(t_var *x);
+char	*ft_strndup(const char *s, size_t n);
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/12 16:01:05 by mtrazzi           #+#    #+#             */
+/*   Updated: 2017/07/12 18:25:12 by mtrazzi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 
@@ -94,6 +106,23 @@ char	*ft_strdup(const char *s)
 	if ((temp = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1))) == NULL)
 		return (NULL);
 	while (s[i])
+	{
+		temp[i] = s[i];
+		i++;
+	}
+	temp[i] = '\0';
+	return (temp);
+}
+
+char	*ft_strndup(const char *s, size_t n)
+{
+	char	*temp;
+	size_t	i;
+
+	i = 0;
+	if ((temp = (char *)malloc(sizeof(char) * (n + 1))) == NULL)
+		return (NULL);
+	while (i < n && s[i])
 	{
 		temp[i] = s[i];
 		i++;

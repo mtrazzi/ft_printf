@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/12 16:00:52 by mtrazzi           #+#    #+#             */
+/*   Updated: 2017/07/12 17:23:29 by mtrazzi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 const char	*end_op(const char *s)
@@ -26,7 +38,11 @@ t_var		*ft_parse_pre(const char *s, t_var *x)
 	while (ft_isdigit(str[i]))
 		i++;
 	if (str[i] == '.')
+	{
 		x->f->pre = ft_atoi(str + i + 1);
+		if (x->f->pre == 0)
+			x->f->len = -1;
+	}
 	else
 		x->f->pre = 0; //défault
 	return (x);
@@ -60,6 +76,7 @@ t_var		*ft_parse(const char*s, t_var *x)
 		i++;
 	if (s[i] == '.')
 		while (ft_isdigit(s[++i])) {}
-	x->f->len = ft_len_spe(s + i);
+	if (x->f->len != -1)
+		x->f->len = ft_len_spe(s + i);
 	return (x);
 }

@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_insert.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/12 16:00:47 by mtrazzi           #+#    #+#             */
+/*   Updated: 2017/07/12 19:45:37 by mtrazzi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 t_var	*ft_insert_pre(t_var *x)
 {
 	char c;
 	
-	if (x->f->opt[4] > '0')
+	if (x->f->opt[4] != '0' && !ft_is_null_u(x))
 	{
 		c = (x->f->opt)[4];
 		if (c == 'x')
@@ -31,9 +43,11 @@ t_var	*ft_insert_str(t_var *x)
 	if (ft_strchr("oxX", x->f->type))
 		ft_conv_d(x);
 	if (x->f->type == 's')
-		change_str(x, x->u->s);
+		ft_conv_s(x);
 	if (x->f->type == '%')
 		change_str(x, "%");
+	if (x->f->type == 'c')
+		ft_conv_c(x);
 	return (x);
 }
 
@@ -50,6 +64,8 @@ t_var	*ft_insert_start(t_var *x)
 	str_len = ft_strlen(x->str);
 	while (n + str_len + pre_len < x->f->pre)
 		n++;
+	if (x->f->type == 's')
+		n = 0;
 	change_mid(x, ft_memset(ft_strnew(n), '0', n));
 	while (m + n + str_len + ft_strlen(x->pre) < x->f->min)
 		m++;
@@ -70,6 +86,8 @@ t_var	*ft_insert_mid_suf(t_var *x)
 		return (ft_insert_start(x));
 	while (n + (x->f->type == 'o' ? ft_strlen(x->pre) : 0) + ft_strlen(x->str) < x->f->pre)
 		n++;
+	if (x->f->type == 's')
+		n = 0;
 	while (m + n + ft_strlen(x->str) + ft_strlen(x->pre) < x->f->min)
 		m++;
 	//printf("\n>>>m : %zu", m);
@@ -80,7 +98,7 @@ t_var	*ft_insert_mid_suf(t_var *x)
 	//printf("\n>>>x->f->pre : %zu", x->f->pre);
 	//printf("\n>>>x->f->min : %d", x->f->min);	
 	
-	if (!(str1 = ft_memset(ft_strnew(m), ' ', m)))
+	if (!(str1 = ft_memset(ft_strnew(m), (x->f->opt[2] > '0' ? '0' : ' '), m)))
 		exit(EXIT_FAILURE);
 	if (!(str2 = ft_memset(ft_strnew(n), '0', n)))
 		exit(EXIT_FAILURE);
@@ -93,6 +111,10 @@ t_var	*ft_insert_mid_suf(t_var *x)
 
 t_var *ft_insert(t_var *x)
 {
+	//if (x->f->type == 'c')
+	//	ft_conv_c(x);
+	if (x->f->type == 's' && !(x->str))
+		return (x);
 	x = ft_insert_pre(x);
 	x = ft_insert_str(x);
 	x = ft_insert_mid_suf(x);
