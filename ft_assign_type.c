@@ -44,32 +44,33 @@ t_var	*ft_assign_d(t_var *x, va_list ap)
 
 t_var	*ft_assign_u(t_var *x, va_list ap)
 {
-	if (x->f->type == 'U')
-	{
-		//ft_putstr("coucou");
-		x->u->ju = (uintmax_t)va_arg(ap, long);
-		x->f->type = 'u';
-		x->f->len = 'j';
-	}
 	if (x->f->type == 'O')
 	{
 		x->u->lu = va_arg(ap, unsigned long);
 		x->f->len = 'l';
 		x->f->type = 'o';
 	}
-	if (x->f->len == 0)
+	else if (x->f->type == 'U')
+	{
+		//ft_putstr("coucou");
+		x->u->ju = va_arg(ap, unsigned long);
+		//printf(">>>%U<<<\n", x->u->ju);
+		x->f->type = 'u';
+		x->f->len = 'j';
+	}
+	else if (x->f->len == 0)
 		x->u->u = va_arg(ap, unsigned int);
-	if (x->f->len == 'h')
+	else if (x->f->len == 'h')
 		x->u->hu = (unsigned short)va_arg(ap, unsigned int); //promoted
-	if (x->f->len == 'H')
+	else if (x->f->len == 'H')
 		x->u->hhu = (unsigned char)va_arg(ap, unsigned int); //promoted
-	if (x->f->len == 'l')
+	else if (x->f->len == 'l')
 		x->u->lu = va_arg(ap, unsigned long);
-	if (x->f->len == 'L')
+	else if (x->f->len == 'L')
 		x->u->llu = va_arg(ap, unsigned long long);
-	if (x->f->len == 'j')
+	else if (x->f->len == 'j')
 		x->u->ju = va_arg(ap, uintmax_t);
-	if (x->f->len == 'z')
+	else if (x->f->len == 'z')
 		x->u->zu = va_arg(ap, size_t);
 	return x;
 }

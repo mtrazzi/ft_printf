@@ -54,10 +54,7 @@ t_var	*ft_conv_d_aux(t_var *x, char *str)
 	else if (x->f->len == 'H')
 		change_str(x, ft_itoa_base(x->u->hhu, str));
 	else if (x->f->len == 'j')
-	{
-		printf("%ju\n", x->u->ju);
 		change_str(x, ft_itoa_base(x->u->ju, str));
-	}
 	else if (x->f->len == 'z')
 		change_str(x, ft_itoa_base(x->u->zu, str));
 	else

@@ -21,6 +21,7 @@
 # include <stdint.h>
 # include <wchar.h>
 # include <locale.h>
+# include <limits.h>
 
 typedef struct	s_for //to free
 {
@@ -78,6 +79,8 @@ char	*ft_itoa_base(unsigned long long n, char *base);
 t_var	*ft_conv_d(t_var *x);
 t_var	*ft_conv_s(t_var *x);
 t_var	*ft_conv_c(t_var *x);
+t_var	*ft_conv_d_aux_bis(t_var *);
+t_var	*ft_conv_d_aux(t_var *x, char *str);
 void	change_pre(t_var *x, char *str);
 void	change_str(t_var *x, char *str);
 void	change_mid(t_var *x, char *str);
@@ -85,5 +88,5 @@ void	change_suf(t_var *x, char *str);
 void	ft_free_all(t_var *x);
 int		ft_is_null_u(t_var *x);
 char	*ft_strndup(const char *s, size_t n);
-
+char	*ft_insert_plus(char *str);
 #endif
