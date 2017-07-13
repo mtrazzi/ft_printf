@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:40 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/12 19:47:31 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/13 16:35:22 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,28 @@ t_var	*ft_conv_d_aux(t_var *x, char *str)
 	return (x);
 }
 
+t_var	*ft_conv_d_aux_bis(t_var *x)
+{
+	if (x->f->len == 'l')
+		change_str(x, ft_itoa(x->u->ld));
+	else if (x->f->len == 'L')
+		change_str(x, ft_itoa(x->u->lld));
+	else if (x->f->len == 'h')
+		change_str(x, ft_itoa(x->u->hd));
+	else if (x->f->len == 'H')
+		change_str(x, ft_itoa(x->u->hhd));
+	else if (x->f->len == 'j')
+		change_str(x, ft_itoa(x->u->jd));
+	else if (x->f->len == 'z')
+		change_str(x, ft_itoa(x->u->zd));
+	else
+		change_str(x, ft_itoa(x->u->d));
+	return (x);
+}
+
 t_var	*ft_conv_d(t_var *x)
 {
-	if (x->f->type == 'c')
-		ft_conv_c(x);
-	if (x->f->len == -1)
+	if (x->f->len == -1 && !(x->f->type == 'o' && x->f->opt[4] > '0'))
 		return (x);
 	if (x->f->type == 'o')
 		ft_conv_d_aux(x, "01234567");

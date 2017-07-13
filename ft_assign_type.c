@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 15:59:32 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/09 19:20:33 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/13 16:29:02 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_var	*ft_assign_d(t_var *x, va_list ap)
 	if (x->f->len == 0)
 		x->u->d = va_arg(ap, int);
 	if (x->f->len == 'h')
-		x->u->hd = va_arg(ap, int); //promoted
+		x->u->hd = (short)va_arg(ap, int); //promoted
 	if (x->f->len == 'H')
-		x->u->hhd = va_arg(ap, int); //promoted
+		x->u->hhd = (signed char)va_arg(ap, int); //promoted
 	if (x->f->len == 'l')
 		x->u->ld = va_arg(ap, long);
 	if (x->f->len == 'L')
@@ -36,9 +36,9 @@ t_var	*ft_assign_u(t_var *x, va_list ap)
 	if (x->f->len == 0)
 		x->u->u = va_arg(ap, unsigned int);
 	if (x->f->len == 'h')
-		x->u->hu = va_arg(ap, unsigned int); //promoted
+		x->u->hu = (unsigned short)va_arg(ap, unsigned int); //promoted
 	if (x->f->len == 'H')
-		x->u->hhu = va_arg(ap, unsigned int); //promoted
+		x->u->hhu = (unsigned char)va_arg(ap, unsigned int); //promoted
 	if (x->f->len == 'l')
 		x->u->lu = va_arg(ap, unsigned long);
 	if (x->f->len == 'L')

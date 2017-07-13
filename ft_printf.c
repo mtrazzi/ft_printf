@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:59 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/12 20:07:04 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/13 16:30:52 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void ft_final_print(char *s1, char *s2, char *s3, char *s4)
 	ft_putstr(s4);
 }
 
-
 void ft_printf_aux(t_var *x)
 {
 //	ft_putstr("mid>>>");
@@ -32,6 +31,13 @@ void ft_printf_aux(t_var *x)
 //	ft_putstr("<<<\nsuf>>>");
 //	ft_putstr(x->suf);
 //	ft_putstr("<<<\n|");
+	if (x->f->type == 'c' && x->u->c == 0)
+	{
+		ft_putstr(x->mid);
+		ft_putchar(0);
+		ft_putstr(x->suf);
+		return;
+	}
 	if (x->f->opt[2] > '0')
 		ft_final_print(x->pre, x->mid, x->str, x->suf);
 	else
@@ -63,8 +69,8 @@ int	ft_printf(const char * restrict format, ...)
 			x = ft_assign(x, ap);
 			x = ft_conv_d(x);
 			x = ft_insert(x);
-			ret += ft_strlen(x->mid) + ft_strlen(x->pre) + ft_strlen(x->str) + ft_strlen(x->suf);
 			ft_printf_aux(x);
+			ret += ft_strlen(x->mid) + ft_strlen(x->pre) + ft_strlen(x->str) + ft_strlen(x->suf);
 			format = ft_strchr(format + 1, ft_next_conversion(format + 1));
 			ft_free_all(x);
 		}

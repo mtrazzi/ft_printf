@@ -9,16 +9,14 @@ int main(int ac, char **av)
 {
 	(void)ac;
 	(void)av;
+	int x;
 
-	long i = 0;
-	while (i++ < 4294967299)
-	{	
-		ft_printf(">>>|%lx|\n", 4294967296);
-		ft_putnbr(i);
-		//printf(">>>|%lx|\n", 4294967296);
-	}
-	//ft_printf("|%#8x|\n", 42);
-	//printf("|%#8x|\n", 42);
-	printf("%lld", (long long int)42);
+	x = 32768;
+	ft_printf("%hd\n", x);
+//	x = (short)x;
+//	ft_printf("%hd\n", x);
+//	x = (long long)x;
+//	ft_printf("%hd\n", x);
+	
 	return (0);
 }

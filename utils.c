@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:01:05 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/12 18:25:12 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/13 16:40:39 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,12 +223,12 @@ char					*ft_itoa(long long n)
 {
 	char *tmp;
 
-	//if (n == -9223372036854775808)
-	//{
-	//	if ((tmp = ft_strnew(sizeof(char) * 20)) == NULL)
-	//		return (NULL);
-	//	return (ft_strncpy(tmp, "-9223372036854775808", 20));
-	//}
+	if (n == -922337203685477580 - 1)
+	{
+		if ((tmp = ft_strnew(sizeof(char) * 20)) == NULL)
+			return (NULL);
+		return (ft_strncpy(tmp, "-9223372036854775808", 20));
+	}
 	if (n < 0)
 	{
 		if ((tmp = ft_strnew(num_dig(-n) + 1)) == NULL)
@@ -240,6 +240,7 @@ char					*ft_itoa(long long n)
 		return (NULL);
 	return (ft_itoa_aux(n, tmp, num_dig(n), 0));
 }
+
 void	*ft_memalloc(size_t size)
 {
 	char	*ans;

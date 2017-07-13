@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_conv_s.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/13 14:24:18 by mtrazzi           #+#    #+#             */
+/*   Updated: 2017/07/13 14:24:21 by mtrazzi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 t_var	*ft_conv_s(t_var *x)
@@ -10,23 +22,5 @@ t_var	*ft_conv_s(t_var *x)
 		change_str(x, x->u->s);
 	else
 		change_str(x, ft_strndup(x->u->s, x->f->pre));
-	return (x);
-}
-
-t_var	*ft_conv_c(t_var *x)
-{
-	//char *str;
-
-	//if (x->u->c == 0)
-	//{
-	//	ft_putstr("\ntest%^@%&#^%@*!^(!#^&&*^");
-	//	change_str(x, NULL);
-	//	x->f->type = 's';
-	//	return (x);
-	//}
-	//str = ft_strnew(1);
-	//str[0] = x->u->c;
-
-	//x->f->type = 's';
 	return (x);
 }
