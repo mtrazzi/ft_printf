@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 15:59:32 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/13 16:29:02 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/13 21:37:57 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,19 @@
 
 t_var	*ft_assign_d(t_var *x, va_list ap)
 {
-	if (x->f->len == 0)
+	if (x->f->type == 'D')
+	{
+		x->u->ld = va_arg(ap, long);
+		x->f->len = 'l';
+		x->f->type = 'd';
+	}
+	if (x->f->len == 0 || x->f->len == -1)
 		x->u->d = va_arg(ap, int);
+	if (x->f->len == -1 && x->u->d == 0)
+	{
+		x->f->type = 's';
+		x->u->s = "";
+	}
 	if (x->f->len == 'h')
 		x->u->hd = (short)va_arg(ap, int); //promoted
 	if (x->f->len == 'H')
@@ -33,6 +44,19 @@ t_var	*ft_assign_d(t_var *x, va_list ap)
 
 t_var	*ft_assign_u(t_var *x, va_list ap)
 {
+	if (x->f->type == 'U')
+	{
+		//ft_putstr("coucou");
+		x->u->ju = (uintmax_t)va_arg(ap, long);
+		x->f->type = 'u';
+		x->f->len = 'j';
+	}
+	if (x->f->type == 'O')
+	{
+		x->u->lu = va_arg(ap, unsigned long);
+		x->f->len = 'l';
+		x->f->type = 'o';
+	}
 	if (x->f->len == 0)
 		x->u->u = va_arg(ap, unsigned int);
 	if (x->f->len == 'h')
@@ -70,17 +94,9 @@ t_var	*ft_assign_s(t_var *x, va_list ap)
 
 t_var	*ft_assign(t_var *x, va_list ap)
 {
-	if (x->f->type == 'd')
+	if (ft_strchr("di", x->f->type))
 		ft_assign_d(x,ap);
-	if (x->f->type == 'i')
-		ft_assign_d(x,ap);
-	if (x->f->type == 'o')
-		ft_assign_u(x,ap);
-	if (x->f->type == 'u')
-		ft_assign_u(x,ap);
-	if (x->f->type == 'x')
-		ft_assign_u(x,ap);
-	if (x->f->type == 'X')
+	if (ft_strchr("oOuUxX", x->f->type))
 		ft_assign_u(x,ap);
 	if (x->f->type == 'c')
 		ft_assign_c(x,ap);

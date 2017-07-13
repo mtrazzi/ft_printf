@@ -6,11 +6,11 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:01:05 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/13 16:40:39 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/13 20:53:17 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 
 size_t	ft_strlen(const char *s)
@@ -223,7 +223,7 @@ char					*ft_itoa(long long n)
 {
 	char *tmp;
 
-	if (n == -922337203685477580 - 1)
+	if (n == LLONG_MIN)
 	{
 		if ((tmp = ft_strnew(sizeof(char) * 20)) == NULL)
 			return (NULL);
@@ -239,6 +239,38 @@ char					*ft_itoa(long long n)
 	if ((tmp = ft_strnew(sizeof(char) * num_dig(n))) == NULL)
 		return (NULL);
 	return (ft_itoa_aux(n, tmp, num_dig(n), 0));
+}
+
+static	size_t			num_dig_u(unsigned long long n)
+{
+	size_t m;
+
+	m = 1;
+	while (n > 9)
+	{
+		n /= 10;
+		m++;
+	}
+	return (m);
+}
+
+static char				*ft_itoa_aux_u(unsigned long long n, char *s, int len, int i)
+{
+	while (--len >= 0)
+	{
+		s[len] = '0' + n % 10;
+		n /= 10;
+	}
+	return (s - i);
+}
+
+char					*ft_itoa_u(unsigned long long n)
+{
+	char *tmp;
+
+	if ((tmp = ft_strnew(sizeof(char) * num_dig_u(n))) == NULL)
+		return (NULL);
+	return (ft_itoa_aux_u(n, tmp, num_dig(n), 0));
 }
 
 void	*ft_memalloc(size_t size)
@@ -285,19 +317,6 @@ char	*ft_strncpy(char *dest, const char *src, size_t n)
 	}
 	return (dest);
 }
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/27 16:37:43 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/06/01 16:43:38 by mtrazzi          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -309,19 +328,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	return (ft_strcat(ft_strcat(dst, s1), s2));
 }
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/27 12:45:31 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/05/27 12:56:32 by mtrazzi          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "libft.h"
 
 char	*ft_strcat(char *dest, const char *src)
 {
@@ -338,5 +344,18 @@ char	*ft_strcat(char *dest, const char *src)
 		j++;
 	}
 	dest[i + j] = '\0';
+	return (dest);
+}
+
+char	*ft_insert_plus(char *str)
+{
+	char *dest;
+	size_t	i;
+
+	i = 0;
+	dest = ft_strdup(str);
+	while (str[i] == ' ')
+		i++;
+	dest[i - 1] = '+';
 	return (dest);
 }

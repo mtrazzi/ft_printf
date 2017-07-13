@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:40 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/13 16:35:22 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/13 21:37:55 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ t_var	*ft_conv_d_aux(t_var *x, char *str)
 	else if (x->f->len == 'H')
 		change_str(x, ft_itoa_base(x->u->hhu, str));
 	else if (x->f->len == 'j')
+	{
+		printf("%ju\n", x->u->ju);
 		change_str(x, ft_itoa_base(x->u->ju, str));
+	}
 	else if (x->f->len == 'z')
 		change_str(x, ft_itoa_base(x->u->zu, str));
 	else

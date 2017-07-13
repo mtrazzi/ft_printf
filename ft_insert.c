@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:47 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/13 16:24:58 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/13 19:59:27 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,24 +84,26 @@ t_var	*ft_insert_mid_suf(t_var *x)
 		change_pre(x, "");
 	if (x->f->opt[0] > '0')
 		return (ft_insert_start(x));
-	if (x->f->opt[2] > '0' && ft_atoi(x->str) < 0 && (ft_strchr("di", x->f->type)))
+	if ((x->f->pre != 0 || x->f->opt[2] > '0') && ft_atoi(x->str) < 0 && (ft_strchr("di", x->f->type)))
 	{
 		change_str(x, x->str + 1);
 		change_pre(x,  "-");
 	}
-	while (n + (x->f->type == 'o' ? ft_strlen(x->pre) : 0) + ft_strlen(x->str) < x->f->pre)
+	if (x->f->pre != 0 && x->f->opt[2] > '0')
+		x->f->opt[2] = '0';
+	while (n + (x->f->type == 'o' ? ft_strlen(x->pre) : 0) + ft_strlen(x->str) - (x->str[0] == '-') < x->f->pre)
 		n++;
 	if (x->f->type == 's')
 		n = 0;
 	while (m + n + ft_strlen(x->str) + ft_strlen(x->pre) < x->f->min)
 		m++;
-	//printf("\n>>>m : %zu", m);
-	//printf("\n>>>n : %zu", n);
-	//printf("\n>>>str_len : %zu", ft_strlen(x->str));
-	//printf("\n>>>pre_len : %zu", ft_strlen(x->pre));
-	//printf(">>>%s<<<\n", x->pre);
-	//printf("\n>>>x->f->pre : %zu", x->f->pre);
-	//printf("\n>>>x->f->min : %zu", x->f->min);	
+//	printf("\n>>>m : %zu", m);
+//	printf("\n>>>n : %zu", n);
+//	printf("\n>>>str_len : %zu", ft_strlen(x->str));
+//	printf("\n>>>pre_len : %zu", ft_strlen(x->pre));
+//	printf(">>>%s<<<\n", x->pre);
+//	printf("\n>>>x->f->pre : %zu", x->f->pre);
+//	printf("\n>>>x->f->min : %zu", x->f->min);	
 	
 	if (!(str1 = ft_memset(ft_strnew(m), (x->f->opt[2] > '0' ? '0' : ' '), m)))
 		exit(EXIT_FAILURE);
