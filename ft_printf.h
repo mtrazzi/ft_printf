@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:10:13 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/12 18:59:37 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/14 16:12:46 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct	s_var
 	char		*suf; //ce qui vient apres notre str dans le cas du -
 }		t_var;
 
+const char *end_op(const char *s);
 t_var	*ft_parse_opt(const char *s, t_var *x);
 t_var	*ft_parse(const char *s, t_var *x);
 char	ft_next_conversion(const char *str);

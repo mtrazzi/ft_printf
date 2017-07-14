@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:59 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/14 15:35:25 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/14 16:34:15 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,26 @@ void ft_final_print(char *s1, char *s2, char *s3, char *s4)
 	ft_putstr(s2);
 	ft_putstr(s3);
 	ft_putstr(s4);
+}
+
+char *end_format(const char *str)
+{
+	char *s;
+	size_t i;
+
+	i = 0;
+	s = (char *)end_op(str);
+	while (ft_isdigit(s[i]))
+		i++;
+	if (str[i] == '.')
+	{
+		while (ft_isdigit(s[i + 1]))
+			i++;
+		i--;
+	}
+	while (ft_strchr("hljz", s[i]))
+		i++;
+	return (s + i);	
 }
 
 void ft_printf_aux(t_var *x)
@@ -75,7 +95,7 @@ int	ft_printf(const char * restrict format, ...)
 			//ft_putstr("coucou1\n");
 			ft_putchar('%');
 			ret++;
-			format += 1;
+			format += 2;
 		}
 		else if (*format == '%' && ft_next_conversion(format + 1))
 		{
@@ -86,18 +106,23 @@ int	ft_printf(const char * restrict format, ...)
 			x = ft_insert(x);
 			ft_printf_aux(x);
 			ret += ft_strlen(x->mid) + ft_strlen(x->pre) + ft_strlen(x->str) + ft_strlen(x->suf);
-			format = ft_strchr(format + 1, ft_next_conversion(format + 1));
+			format = ft_strchr(format + 1, ft_next_conversion(format + 1)) + 1;
 			ft_free_all(x);
 		}
-		else if (*format == '%')
+		else if (*format == '%' && *(format + 1))
+		{
+			format = end_format(format + 1);
 			ft_putchar(*format);
-		else 
+		}
+		else if (*format == '%')
+			format++;
+		else
 		{
 			//ft_putstr("coucou3\n");
 			ret++;
 			ft_putchar(*format);
+			format++;
 		}
-		format++;
 	}
 	va_end(ap);
 	return (ret);
