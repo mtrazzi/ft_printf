@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:01:05 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/13 20:53:17 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/14 15:33:31 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -321,12 +321,24 @@ char	*ft_strncpy(char *dest, const char *src, size_t n)
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char *dst;
+	size_t i;
 
+	i = 0;
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
 	if ((dst = ft_strnew(ft_strlen(s1) + ft_strlen(s2))) == NULL)
 		return (NULL);
-	return (ft_strcat(ft_strcat(dst, s1), s2));
+	while (i < ft_strlen(s1))
+	{
+		dst[i] = s1[i];
+		i++;
+	}
+	while (i - ft_strlen(s1) < ft_strlen(s2))
+	{
+		dst[i] = s2[i - ft_strlen(s1)];
+		i++;
+	}
+	return (dst);
 }
 
 char	*ft_strcat(char *dest, const char *src)

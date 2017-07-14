@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:47 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/13 19:59:27 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/14 15:12:59 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ t_var	*ft_insert_pre(t_var *x)
 	{
 		c = (x->f->opt)[4];
 		if (c == 'x')
-			change_pre(x,"0x");
+			change_pre(x, ft_strdup("0x"));
 		else if (c == 'X')
-			change_pre(x, "0X");
+			change_pre(x, ft_strdup("0X"));
 		else if (c == 'o')
-			change_pre(x, "0");
+			change_pre(x, ft_strdup("0"));
 		return (x);
 	}
 	if (x->f->opt[1] > '0')
-		change_pre(x, "+");
+		change_pre(x, ft_strdup("+"));
 	if (x->f->opt[3] > '0' && !(x->f->type == '%'))
-		change_pre(x, " ");
+		change_pre(x, ft_strdup(" "));
 	return (x);
 }
 
@@ -45,7 +45,7 @@ t_var	*ft_insert_str(t_var *x)
 	if (x->f->type == 's')
 		ft_conv_s(x);
 	if (x->f->type == '%')
-		change_str(x, "%");
+		change_str(x, ft_strdup("%"));
 	return (x);
 }
 
@@ -67,7 +67,7 @@ t_var	*ft_insert_start(t_var *x)
 	change_mid(x, ft_memset(ft_strnew(n), '0', n));
 	while (m + n + str_len + ft_strlen(x->pre) < x->f->min)
 		m++;
-	change_suf(x, ft_memset(ft_strnew(n), ' ', m));
+	change_suf(x, ft_memset(ft_strnew(m), ' ', m));
 	return (x);
 }
 
@@ -81,13 +81,13 @@ t_var	*ft_insert_mid_suf(t_var *x)
 	n = 0;
 	m = 0;
 	if ((!ft_strncmp(x->pre, "+", 1) || !ft_strncmp(x->pre, " ", 1)) && ft_atoi(x->str) < 0)
-		change_pre(x, "");
+		change_pre(x, ft_strdup(""));
 	if (x->f->opt[0] > '0')
 		return (ft_insert_start(x));
 	if ((x->f->pre != 0 || x->f->opt[2] > '0') && ft_atoi(x->str) < 0 && (ft_strchr("di", x->f->type)))
 	{
-		change_str(x, x->str + 1);
-		change_pre(x,  "-");
+		change_str(x, ft_strdup(x->str + 1));
+		change_pre(x,  ft_strdup("-"));
 	}
 	if (x->f->pre != 0 && x->f->opt[2] > '0')
 		x->f->opt[2] = '0';
@@ -125,7 +125,7 @@ t_var *ft_insert(t_var *x)
 		return (x);
 	if (x->f->type == 'c' && (x->u->c == 0))
 	{
-		change_str(x, " ");
+		change_str(x, ft_strdup(" "));
 		x->f->type = 'd';
 		x->f->len = 0;
 		x->u->d = 1;

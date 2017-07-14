@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:59 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/13 21:28:17 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/14 15:35:25 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,18 @@ void ft_final_print(char *s1, char *s2, char *s3, char *s4)
 
 void ft_printf_aux(t_var *x)
 {
-//	ft_putstr("mid>>>");
-//	ft_putstr(x->mid);
-//	ft_putstr("<<<\npre>>>");
-//	ft_putstr(x->pre);
-//	ft_putstr("<<<\nstr>>>");
-//	ft_putstr(x->str);
-//	ft_putstr("<<<\nsuf>>>");
-//	ft_putstr(x->suf);
-//	ft_putstr("<<<\n|");
-//	ft_putchar(x->f->type);
-//	ft_putchar(x->f->len);
-//	ft_putchar('\n');
-//	ft_putstr(ft_itoa(x->u->lu));
-//	ft_putstr("\n");
+	/*ft_putstr("mid>>>");
+	ft_putstr(x->mid);
+	ft_putstr("<<<\npre>>>");
+	ft_putstr(x->pre);
+	ft_putstr("<<<\nstr>>>");
+	ft_putstr(x->str);
+	ft_putstr("<<<\nsuf>>>");
+	ft_putstr(x->suf);
+	ft_putstr("<<<\n|");
+	ft_putchar(x->f->type);
+	ft_putchar(x->f->len);
+	ft_putchar('\n');*/
 	if (x->pre[0] == '-' && x->mid[0] == '0')
 	{
 		ft_final_print(x->pre, x->mid, x->str, x->suf);
@@ -50,8 +48,8 @@ void ft_printf_aux(t_var *x)
 	}
 	if (!ft_strncmp(x->pre, "+", 1) && !ft_strncmp(x->mid, " ", 1))
 	{
-		change_mid(x, ft_insert_plus(x->mid));
-		change_pre(x, " ");
+		x->mid = ft_insert_plus(x->mid);
+		change_pre(x, ft_strdup(" "));
 	}
 	if (x->f->opt[2] > '0')
 		ft_final_print(x->pre, x->mid, x->str, x->suf);
@@ -91,6 +89,8 @@ int	ft_printf(const char * restrict format, ...)
 			format = ft_strchr(format + 1, ft_next_conversion(format + 1));
 			ft_free_all(x);
 		}
+		else if (*format == '%')
+			ft_putchar(*format);
 		else 
 		{
 			//ft_putstr("coucou3\n");

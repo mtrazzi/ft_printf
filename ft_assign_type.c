@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 15:59:32 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/13 21:37:57 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/14 14:52:35 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,22 @@ t_var	*ft_assign_s(t_var *x, va_list ap)
 
 t_var	*ft_assign(t_var *x, va_list ap)
 {
-	if (ft_strchr("di", x->f->type))
+	if (x->f->type == 'p')
+	{
+		x->f->type = 'x';
+		x->f->len = 'l';
+		x->f->opt[4] = 'x';
+		x->u->lu = va_arg(ap, unsigned long);
+		if (x->u->lu == 0)
+			change_pre(x, ft_strdup("0x"));
+	}
+	else if (ft_strchr("di", x->f->type))
 		ft_assign_d(x,ap);
-	if (ft_strchr("oOuUxX", x->f->type))
+	else if (ft_strchr("oOuUxX", x->f->type))
 		ft_assign_u(x,ap);
-	if (x->f->type == 'c')
+	else if (x->f->type == 'c')
 		ft_assign_c(x,ap);
-	if (x->f->type == 's')
+	else if (x->f->type == 's')
 		ft_assign_s(x,ap);
 	return (x);
 }

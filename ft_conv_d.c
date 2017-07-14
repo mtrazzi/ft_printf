@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:40 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/13 21:37:55 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/14 14:48:06 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_itoa_base(unsigned long long n, char *base)
 	int	len;
 
 	len = num_dig_base(n, base);
-	if (!(tmp = ft_strnew(sizeof(char) * len)))
+	if (!(tmp = ft_strnew(sizeof(char) * len))) //to free
 		return (NULL);
 	while (--len >= 0)
 	{
