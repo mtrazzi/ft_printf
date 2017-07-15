@@ -6,18 +6,18 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:55 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/13 14:24:31 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/15 21:20:13 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	is_opt(char c)
+int		is_opt(char c)
 {
 	return (c == '-' || c == '+' || c == '0' || c == ' ' || c == '#');
 }
 
-char	*ft_parse_opt_aux(const char *s) //s du type "%-12.4hd"
+char	*ft_parse_opt_aux(const char *s)
 {
 	char *res;
 
@@ -40,18 +40,18 @@ char	*ft_parse_opt_aux(const char *s) //s du type "%-12.4hd"
 
 t_var	*ft_parse_opt(const char *s, t_var *x)
 {
-	char *res;
-	t_for *f;
-	char c;
+	char	*res;
+	t_for	*f;
+	char	c;
 
-	f = (t_for *)malloc(sizeof(t_for)); //to free
+	f = (t_for *)malloc(sizeof(t_for));
 	res = ft_parse_opt_aux(s);
 	if (res[0] > '0' && res[2] > '0')
 		res[2] = '0';
 	if (res[1] > '0' && res[3] > '0')
 		res[3] = '0';
-	if ((res[1] > '0' && res[4] > '0')  || (res[3] > '0' && res[4] > '0'))
-		exit(EXIT_FAILURE); //comportement non défini avec #+ et #esp
+	if ((res[1] > '0' && res[4] > '0') || (res[3] > '0' && res[4] > '0'))
+		exit(EXIT_FAILURE);
 	c = ft_next_conversion(s + 1);
 	if (res[4] > '0' && c != 'x' && c != 'X' && c != 'o' && c != 'O')
 		exit(EXIT_FAILURE);

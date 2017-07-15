@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_c.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/15 21:20:27 by mtrazzi           #+#    #+#             */
+/*   Updated: 2017/07/15 21:21:20 by mtrazzi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-size_t	ft_size_C(t_var *x)
+size_t	ft_size_c(t_var *x)
 {
-	int n;
-	size_t res;
+	int		n;
+	size_t	res;
 
 	n = ft_count_bits(x->u->lc);
 	if (n <= 7)
@@ -17,12 +29,12 @@ size_t	ft_size_C(t_var *x)
 	return (res);
 }
 
-void	ft_print_C_minus(t_var *x)
+void	ft_print_c_minus(t_var *x)
 {
 	size_t nb_bytes;
 	size_t i;
 
-	nb_bytes = ft_size_C(x);
+	nb_bytes = ft_size_c(x);
 	i = nb_bytes;
 	ft_putwchar_t(x->u->lc);
 	while (i < x->f->min)
@@ -32,16 +44,16 @@ void	ft_print_C_minus(t_var *x)
 	}
 }
 
-void	ft_print_C(t_var *x)
+void	ft_print_c(t_var *x)
 {
 	size_t nb_bytes;
 	size_t i;
 
-	nb_bytes = ft_size_C(x);
+	nb_bytes = ft_size_c(x);
 	if (x->f->opt[0] > '0')
 	{
-		ft_print_C_minus(x);
-		return;
+		ft_print_c_minus(x);
+		return ;
 	}
 	i = 0;
 	while (i + nb_bytes < x->f->min)
@@ -50,4 +62,4 @@ void	ft_print_C(t_var *x)
 		i++;
 	}
 	ft_putwchar_t(x->u->lc);
-}	
+}

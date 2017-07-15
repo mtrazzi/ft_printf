@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:52 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/13 21:24:19 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/15 21:17:21 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,10 @@ const char	*end_op(const char *s)
 	return (s + i);
 }
 
-t_var		*ft_parse_min(const char *s, t_var *x)
-{
-	x->f->min = ft_atoi(end_op(s + 1));
-	return (x);
-}
-
 t_var		*ft_parse_pre(const char *s, t_var *x)
 {
-	const char *str;
-	int i;
+	const char	*str;
+	int			i;
 
 	i = 0;
 	str = end_op(s + 1);
@@ -44,7 +38,7 @@ t_var		*ft_parse_pre(const char *s, t_var *x)
 			x->f->len = -1;
 	}
 	else
-		x->f->pre = 0; //défault
+		x->f->pre = 0;
 	return (x);
 }
 
@@ -64,18 +58,22 @@ char		ft_len_spe(const char *str)
 		return (0);
 }
 
-t_var		*ft_parse(const char*s, t_var *x)
+t_var		*ft_parse(const char *s, t_var *x)
 {
 	int i;
 
 	i = 1;
-	x = ft_parse_type(s, ft_parse_pre(s, ft_parse_min(s, ft_parse_opt(s, x))));
+	ft_parse_opt(s, x);
+	x->f->min = ft_atoi(end_op(s + 1));
+	ft_parse_pre(s, x);
+	ft_parse_type(s, x);
 	while (is_opt(s[i]))
 		i++;
 	while (ft_isdigit(s[i]))
 		i++;
 	if (s[i] == '.')
-		while (ft_isdigit(s[++i])) {}
+		while (ft_isdigit(s[++i]))
+			;
 	if (x->f->len != -1)
 		x->f->len = ft_len_spe(s + i);
 	return (x);

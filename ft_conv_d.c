@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:40 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/14 14:48:06 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/15 21:09:42 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ static size_t	num_dig_base(unsigned long long n, char *base)
 	return (count);
 }
 
-char	*ft_itoa_base(unsigned long long n, char *base)
+char			*ft_itoa_base(unsigned long long n, char *base)
 {
-	char *tmp;
-	int	len;
+	char	*tmp;
+	int		len;
 
 	len = num_dig_base(n, base);
-	if (!(tmp = ft_strnew(sizeof(char) * len))) //to free
+	if (!(tmp = ft_strnew(sizeof(char) * len)))
 		return (NULL);
 	while (--len >= 0)
 	{
@@ -43,7 +43,7 @@ char	*ft_itoa_base(unsigned long long n, char *base)
 	return (tmp);
 }
 
-t_var	*ft_conv_d_aux(t_var *x, char *str)
+t_var			*ft_conv_d_aux(t_var *x, char *str)
 {
 	if (x->f->len == 'l')
 		change_str(x, ft_itoa_base(x->u->lu, str));
@@ -62,7 +62,7 @@ t_var	*ft_conv_d_aux(t_var *x, char *str)
 	return (x);
 }
 
-t_var	*ft_conv_d_aux_bis(t_var *x)
+t_var			*ft_conv_d_aux_bis(t_var *x)
 {
 	if (x->f->len == 'l')
 		change_str(x, ft_itoa(x->u->ld));
@@ -81,7 +81,7 @@ t_var	*ft_conv_d_aux_bis(t_var *x)
 	return (x);
 }
 
-t_var	*ft_conv_d(t_var *x)
+t_var			*ft_conv_d(t_var *x)
 {
 	if (x->f->len == -1 && !(x->f->type == 'o' && x->f->opt[4] > '0'))
 		return (x);
