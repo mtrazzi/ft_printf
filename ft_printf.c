@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:59 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/14 16:34:15 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/15 18:46:36 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,16 @@ void ft_printf_aux(t_var *x)
 	ft_putchar(x->f->type);
 	ft_putchar(x->f->len);
 	ft_putchar('\n');*/
+	if (x->f->type == 'C')
+	{
+		ft_print_C(x);
+		return ;
+	}
+	if (x->f->type == 'S')
+	{
+		ft_print_S(x);
+		return ;
+	}
 	if (x->pre[0] == '-' && x->mid[0] == '0')
 	{
 		ft_final_print(x->pre, x->mid, x->str, x->suf);

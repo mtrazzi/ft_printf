@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:10:13 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/14 16:12:46 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/15 18:46:11 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,10 @@ void	ft_free_all(t_var *x);
 int		ft_is_null_u(t_var *x);
 char	*ft_strndup(const char *s, size_t n);
 char	*ft_insert_plus(char *str);
+void	ft_putwchar_t(wchar_t w);
+int		ft_count_bits(unsigned int n);
+void	ft_putstr_uni(wchar_t *s);
+void	ft_print_C(t_var *x);
+void	ft_print_S(t_var *x);
+
 #endif

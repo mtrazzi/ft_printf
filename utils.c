@@ -6,12 +6,18 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:01:05 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/14 15:33:31 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/15 16:29:44 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+int		ft_count_bits(unsigned int n)
+{
+	if (n == 0 || n == 1)
+		return (1);
+	return (ft_count_bits(n / 2) + 1);
+}
 
 size_t	ft_strlen(const char *s)
 {

@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 15:59:32 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/14 14:52:35 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/15 19:07:37 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,13 @@ t_var	*ft_assign(t_var *x, va_list ap)
 		ft_assign_c(x,ap);
 	else if (x->f->type == 's')
 		ft_assign_s(x,ap);
+	else if (x->f->type == 'C')
+		x->u->lc = va_arg(ap, wint_t);
+	else if (x->f->type == 'S')
+	{
+		x->u->ls = va_arg(ap, wchar_t *);
+		if (!x->u->ls)
+			x->u->ls = L"(null)";
+	}
 	return (x);
 }

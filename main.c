@@ -10,9 +10,8 @@ int main(int ac, char **av)
 	(void)ac;
 	(void)av;
 
-	uintmax_t x = UINT_MAX;
-	ft_printf("%U\n", ");
-	printf("%U\n", x);
-
+	setlocale(LC_ALL, "");
+	ft_printf("%4S\n", NULL);
+	printf("%4S\n", NULL);
 	return (0);
 }
