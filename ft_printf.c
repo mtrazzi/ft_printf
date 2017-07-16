@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:59 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/15 21:48:54 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/16 18:06:51 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,26 @@
 int		ft_printf_aux_aux(t_var *x)
 {
 	if (x->f->type == 'C')
-	{
 		ft_print_c(x);
-		return (0);
-	}
-	if (x->f->type == 'S')
-	{
+	else if (x->f->type == 'S')
 		ft_print_s(x);
-		return (0);
-	}
-	if (x->pre[0] == '-' && x->mid[0] == '0')
+	else if (x->pre[0] == '-' && ft_strchr(x->mid, '0'))
 	{
-		ft_final_print(x->pre, x->mid, x->str, x->suf);
-		return (0);
+		if (x->mid[0] == '0')
+			ft_final_print(x->pre, x->mid, x->str, x->suf);
+		else
+			ft_final_print(" ", ft_insert_minus(x->mid), x->str, x->suf);
 	}
-	if (x->f->type == 'c' && x->u->c == 0)
+	else if (x->f->type == 'c' && x->u->c == 0)
 	{
 		ft_putstr(x->mid);
 		ft_putchar(0);
 		ft_putstr(x->suf);
 		return (0);
 	}
+	if (x->f->type  == 'C' || x->f->type == 'S' || \
+	(x->pre[0] == '-' && ft_strchr(x->mid, '0')))
+		return (0);
 	return (1);
 }
 
@@ -67,8 +66,11 @@ size_t	ft_process(const char *format, va_list ap)
 	ft_conv_d(x);
 	ft_insert(x);
 	ft_printf_aux(x);
-	result = ft_strlen(x->mid) + ft_strlen(x->pre) + \
-	ft_strlen(x->str) + ft_strlen(x->suf);
+	if (x->f->type == 'C' || x->f->type == 'S')
+		result = (x->f->type == 'C' ? ft_ret_c(x) : ft_ret_s(x));
+	else
+		result = ft_strlen(x->mid) + ft_strlen(x->pre) + \
+		ft_strlen(x->str) + ft_strlen(x->suf);
 	ft_free_all(x);
 	return (result);
 }

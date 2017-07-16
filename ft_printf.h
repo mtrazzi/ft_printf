@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:10:13 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/15 21:58:54 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/16 17:58:48 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,8 @@ void					ft_print_c(t_var *x);
 void					ft_print_s(t_var *x);
 t_var					*ft_insert_str(t_var *x);
 void					ft_final_print(char *s1, char *s2, char *s3, char *s4);
+size_t					ft_ret_c(t_var *x);
+size_t					ft_ret_s(t_var *x);
+char					*ft_insert_minus(char *str);
 
 #endif

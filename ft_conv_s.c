@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:24:18 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/15 21:57:12 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/16 16:31:28 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ t_var	*ft_insert_str(t_var *x)
 		ft_conv_s(x);
 	if (x->f->type == '%')
 		change_str(x, ft_strdup("%"));
+	if (x->f->opt[1] > '0' && ft_atoi(x->str) < 0)
+		change_pre(x, ft_strdup(""));
 	return (x);
 }

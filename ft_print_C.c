@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/15 21:20:27 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/15 21:21:20 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/16 16:24:38 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,12 @@ void	ft_print_c(t_var *x)
 		i++;
 	}
 	ft_putwchar_t(x->u->lc);
+}
+
+size_t	ft_ret_c(t_var *x)
+{
+	if (x->f->min >= ft_size_c(x))
+		return (x->f->min);
+	else
+		return (ft_size_c(x));
 }

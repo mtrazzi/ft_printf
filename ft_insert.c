@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:47 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/15 22:08:56 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/16 18:39:05 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_var	*ft_insert_pre(t_var *x)
 			change_pre(x, ft_strdup("0x"));
 		else if (c == 'X')
 			change_pre(x, ft_strdup("0X"));
-		else if (c == 'o')
+		else if (c == 'o' || c == 'O')
 			change_pre(x, ft_strdup("0"));
 		return (x);
 	}

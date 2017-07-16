@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:55 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/15 21:20:13 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/16 16:09:34 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,8 @@ t_var	*ft_parse_opt(const char *s, t_var *x)
 		res[2] = '0';
 	if (res[1] > '0' && res[3] > '0')
 		res[3] = '0';
-	if ((res[1] > '0' && res[4] > '0') || (res[3] > '0' && res[4] > '0'))
-		exit(EXIT_FAILURE);
 	c = ft_next_conversion(s + 1);
-	if (res[4] > '0' && c != 'x' && c != 'X' && c != 'o' && c != 'O')
-		exit(EXIT_FAILURE);
-	else if (res[4] > '0')
+	if (res[4] > '0')
 		res[4] = c;
 	f->opt = res;
 	x->f = f;

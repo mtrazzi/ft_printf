@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 15:59:32 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/15 21:10:02 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/16 17:12:49 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_assign_c(t_var *x, va_list ap)
 	if (x->f->len == 0)
 		x->u->c = va_arg(ap, int);
 	if (x->f->len == 'l')
-		x->u->lc = va_arg(ap, wint_t);
+		x->f->type = 'C';
 }
 
 void	ft_assign_s(t_var *x, va_list ap)
@@ -82,7 +82,7 @@ void	ft_assign_s(t_var *x, va_list ap)
 	if (x->f->len == 0)
 		x->u->s = va_arg(ap, char *);
 	if (x->f->len == 'l')
-		x->u->ls = va_arg(ap, wchar_t *);
+		x->f->type = 'S';
 }
 
 void	ft_assign(t_var *x, va_list ap)
@@ -96,7 +96,7 @@ void	ft_assign(t_var *x, va_list ap)
 		if (x->u->lu == 0)
 			change_pre(x, ft_strdup("0x"));
 	}
-	else if (ft_strchr("di", x->f->type))
+	else if (ft_strchr("Ddi", x->f->type))
 		ft_assign_d(x, ap);
 	else if (ft_strchr("oOuUxX", x->f->type))
 		ft_assign_u(x, ap);
@@ -104,9 +104,9 @@ void	ft_assign(t_var *x, va_list ap)
 		ft_assign_c(x, ap);
 	else if (x->f->type == 's')
 		ft_assign_s(x, ap);
-	else if (x->f->type == 'C')
+	if (x->f->type == 'C')
 		x->u->lc = va_arg(ap, wint_t);
-	else if (x->f->type == 'S')
+	if (x->f->type == 'S')
 	{
 		x->u->ls = va_arg(ap, wchar_t *);
 		if (!x->u->ls)
