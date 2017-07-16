@@ -3,7 +3,7 @@
 int main()
 {
 	setlocale(LC_ALL, "");
-	ft_printf("{%.u, %.0u}\n", 0, 0);
-	printf("{%.u, %.0u}\n", 0, 0);
+	ft_printf("%.lu, %.0u\n", 0L, 0);
+	printf("%.lu, %.0u\n", 0L, 0);
 	return (0);
 }

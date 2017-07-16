@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/15 19:41:07 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/15 19:53:12 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/16 18:44:00 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void					*ft_memalloc(size_t size)
 	char	*ans;
 
 	if ((ans = (char *)malloc(size)) == 0)
-		return (NULL);
+		exit(EXIT_FAILURE);
 	ft_bzero(ans, size);
 	return (ans);
 }

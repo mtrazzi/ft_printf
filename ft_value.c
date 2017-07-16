@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/15 19:55:40 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/16 19:37:57 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ int		ft_is_null_u(t_var *x)
 		return (1);
 	if (c == 'z' && a->zu == 0)
 		return (1);
-	return (c == -1);
+	if (c == -1 && !a->u && !a->lu && !a->llu && !a->hu && !a->hhu && !a->ju && !a->zu)
+		return (1);
+	return (0);
 }

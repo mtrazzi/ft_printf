@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/15 19:38:52 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/15 19:39:14 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/16 18:42:50 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_strdup(const char *s)
 
 	i = 0;
 	if ((temp = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1))) == NULL)
-		return (NULL);
+		exit(EXIT_FAILURE);
 	while (s[i])
 	{
 		temp[i] = s[i];
@@ -71,7 +71,7 @@ char	*ft_strndup(const char *s, size_t n)
 
 	i = 0;
 	if ((temp = (char *)malloc(sizeof(char) * (n + 1))) == NULL)
-		return (NULL);
+		exit(EXIT_FAILURE);
 	while (i < n && s[i])
 	{
 		temp[i] = s[i];
@@ -86,6 +86,6 @@ char	*ft_strnew(size_t size)
 	char *tmp;
 
 	if ((tmp = (char *)ft_memalloc(size + 1)) == NULL)
-		return (NULL);
+		exit(EXIT_FAILURE);
 	return (tmp);
 }

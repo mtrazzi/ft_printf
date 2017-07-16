@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:59 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/16 18:06:51 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/16 19:37:53 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int		ft_printf_aux_aux(t_var *x)
 
 void	ft_printf_aux(t_var *x)
 {
+	if (ft_is_null_u(x) && x->f->type == 'u')
+		change_str(x, ft_strdup(""));
 	if (!ft_printf_aux_aux(x))
 		return ;
 	if (!ft_strncmp(x->pre, "+", 1) && !ft_strncmp(x->mid, " ", 1))
