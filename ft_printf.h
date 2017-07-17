@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:10:13 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/16 17:58:48 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/17 12:56:24 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct			s_for
 	size_t				pre;
 	char				len;
 	char				type;
+	int					zero;
 }						t_for;
 
 typedef union			u_val

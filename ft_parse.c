@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:52 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/15 21:17:21 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/17 13:48:09 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_var		*ft_parse_pre(const char *s, t_var *x)
 	{
 		x->f->pre = ft_atoi(str + i + 1);
 		if (x->f->pre == 0)
-			x->f->len = -1;
+			x->f->zero = 1;
 	}
 	else
 		x->f->pre = 0;
@@ -65,8 +65,11 @@ t_var		*ft_parse(const char *s, t_var *x)
 	i = 1;
 	ft_parse_opt(s, x);
 	x->f->min = ft_atoi(end_op(s + 1));
+	x->f->zero = 0;
 	ft_parse_pre(s, x);
 	ft_parse_type(s, x);
+	if (x->f->type == '%')
+		x->f->pre = 0;
 	while (is_opt(s[i]))
 		i++;
 	while (ft_isdigit(s[i]))
@@ -74,7 +77,6 @@ t_var		*ft_parse(const char *s, t_var *x)
 	if (s[i] == '.')
 		while (ft_isdigit(s[++i]))
 			;
-	if (x->f->len != -1)
-		x->f->len = ft_len_spe(s + i);
+	x->f->len = ft_len_spe(s + i);
 	return (x);
 }

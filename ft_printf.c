@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:59 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/16 19:37:53 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/17 14:46:25 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		ft_printf_aux_aux(t_var *x)
 		ft_putstr(x->suf);
 		return (0);
 	}
-	if (x->f->type  == 'C' || x->f->type == 'S' || \
+	if (x->f->type == 'C' || x->f->type == 'S' || \
 	(x->pre[0] == '-' && ft_strchr(x->mid, '0')))
 		return (0);
 	return (1);
@@ -40,8 +40,6 @@ int		ft_printf_aux_aux(t_var *x)
 
 void	ft_printf_aux(t_var *x)
 {
-	if (ft_is_null_u(x) && x->f->type == 'u')
-		change_str(x, ft_strdup(""));
 	if (!ft_printf_aux_aux(x))
 		return ;
 	if (!ft_strncmp(x->pre, "+", 1) && !ft_strncmp(x->mid, " ", 1))
@@ -53,6 +51,8 @@ void	ft_printf_aux(t_var *x)
 		ft_final_print(x->pre, x->mid, x->str, x->suf);
 	else if ((!ft_strncmp(x->pre, "+", 1) \
 			|| !ft_strncmp(x->pre, " ", 1)) && x->f->type == 'd')
+		ft_final_print(x->pre, x->mid, x->str, x->suf);
+	else if (x->f->pre > 0 && ft_strchr(x->pre, '0'))
 		ft_final_print(x->pre, x->mid, x->str, x->suf);
 	else
 		ft_final_print(x->mid, x->pre, x->str, x->suf);

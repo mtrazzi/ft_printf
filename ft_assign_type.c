@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 15:59:32 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/16 17:12:49 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/17 14:48:08 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	ft_assign_d(t_var *x, va_list ap)
 		x->f->len = 'l';
 		x->f->type = 'd';
 	}
-	if (x->f->len == 0 || x->f->len == -1)
+	if (x->f->len == 0 || x->f->zero)
 		x->u->d = va_arg(ap, int);
-	if (x->f->len == -1 && x->u->d == 0)
+	if (x->f->zero && x->u->d == 0)
 	{
 		x->f->type = 's';
 		x->u->s = "";
@@ -109,7 +109,7 @@ void	ft_assign(t_var *x, va_list ap)
 	if (x->f->type == 'S')
 	{
 		x->u->ls = va_arg(ap, wchar_t *);
-		if (!x->u->ls)
-			x->u->ls = L"(null)";
+		if (!x->u->ls || x->f->zero)
+			x->u->ls = (!x->u->ls ? L"(null)" : L"");
 	}
 }

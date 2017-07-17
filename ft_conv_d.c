@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:40 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/16 19:21:33 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/17 13:31:25 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ char			*ft_itoa_base(unsigned long long n, char *base)
 
 t_var			*ft_conv_d_aux(t_var *x, char *str)
 {
-	if (x->f->len == 'l')
+	if (x->f->zero && x->f->opt[4] == '0')
+		change_str(x, ft_strdup(""));
+	else if (x->f->len == 'l')
 		change_str(x, ft_itoa_base(x->u->lu, str));
 	else if (x->f->len == 'L')
 		change_str(x, ft_itoa_base(x->u->llu, str));
@@ -83,7 +85,7 @@ t_var			*ft_conv_d_aux_bis(t_var *x)
 
 t_var			*ft_conv_d(t_var *x)
 {
-	if (x->f->len == -1 && !(x->f->type == 'o' && x->f->opt[4] > '0'))
+	if (x->f->zero && !(x->f->type == 'o' && x->f->opt[4] > '0'))
 		return (x);
 	if (x->f->type == 'o')
 		ft_conv_d_aux(x, "01234567");

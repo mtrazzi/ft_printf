@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 16:00:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/07/16 19:37:57 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/07/17 13:09:35 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		ft_is_null_u(t_var *x)
 	t_val	*a;
 	char	c;
 
-	c = x->f->len;
+	c = x->f->zero;
 	a = x->u;
 	if (c == 0 && a->u == 0)
 		return (1);
@@ -33,7 +33,5 @@ int		ft_is_null_u(t_var *x)
 		return (1);
 	if (c == 'z' && a->zu == 0)
 		return (1);
-	if (c == -1 && !a->u && !a->lu && !a->llu && !a->hu && !a->hhu && !a->ju && !a->zu)
-		return (1);
-	return (0);
+	return (c == 1 && !(a->u));
 }
